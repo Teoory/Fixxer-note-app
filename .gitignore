@@ -1,0 +1,12 @@
+*.idea
+*api/uploads/*
+.env
+
+api/profilePhotos/*
+
+
+# dependencies
+*/node_modules
+*.pnp
+*.pnp.js
+*.txt
