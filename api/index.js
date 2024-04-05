@@ -4,6 +4,7 @@ const mongoose = require ('mongoose');
 const User = require ('./models/User');
 const Note = require ('./models/Note');
 const Products = require ('./models/Products');
+const Contact = require ('./models/Contact');
 const bcrypt = require ('bcryptjs');
 const jwt = require ('jsonwebtoken');
 const cookieParser = require ('cookie-parser');
@@ -96,20 +97,9 @@ app.get('/profile', (req, res) => {
 });
 
 app.get('/profile/:username', async (req, res) => {
-    const { username } = req.params;
-  
-    try {
-      const user = await User.findOne({ username });
-      if (!user) {
-        return res.status(404).json({ error: 'User not found' });
-      }
-      const posts = await Post.find({ author: user._id }).sort({ createdAt: -1 });
-  
-      res.json({ user, posts });
-    } catch (error) {
-      console.error('Error getting user profile:', error.message);
-      res.status(500).json({ error: 'Internal Server Error' });
-    }
+    const {username} = req.params;
+    const userDoc = await User.findOne ({username});
+    res.json(userDoc);
 });
 
 //? Note Post & Get
@@ -212,6 +202,40 @@ app.delete ('/deleteallProducts', async (req, res) => {
     try {
         const productDoc = await Products.deleteMany();
         res.json(productDoc);
+    } catch (e) {
+        res.status(400).json(e);
+    }
+});
+
+//? CONTACT PAGE
+app.post ('/contact', async (req, res) => {
+    const {name, email, message} = req.body;
+    try {
+        const contactDoc = await Contact.create({
+            name,
+            email,
+            message,
+        });
+        res.json(contactDoc);
+    } catch (e) {
+        res.status(400).json(e);
+    }
+});
+
+app.get ('/contact', async (req, res) => {
+    try {
+        const contactDoc = await Contact.find();
+        res.json(contactDoc);
+    } catch (e) {
+        res.status(400).json(e);
+    }
+});
+
+app.delete ('/contact/:id', async (req, res) => {
+    try {
+        const {id} = req.params;
+        const contactDoc = await Contact.findByIdAndDelete(id);
+        res.json(contactDoc);
     } catch (e) {
         res.status(400).json(e);
     }

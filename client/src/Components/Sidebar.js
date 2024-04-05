@@ -30,6 +30,7 @@ const Sidebar = () => {
     }
 
     const tags = userInfo?.tags;
+    const username = userInfo?.username;
 
     const isAdmin = tags?.includes('admin');
     const isEditor = tags?.includes('editor') || isAdmin;
@@ -99,22 +100,13 @@ const Sidebar = () => {
                     </span>
                     <h3>Products</h3>
                 </Link>
-                <Link to={"/report"} onClick={() => handleLinkClick(4)} className={activeLink === 4 ? 'active' : ''}>
+
+                <Link to={"/newproduct"} onClick={() => handleLinkClick(5)} className={activeLink === 5 ? 'active' : ''}>
                     <span class="material-symbols-outlined">
-                        report
+                        calculate
                     </span>
-                    <h3>Report</h3>
+                    <h3>Hesaplama</h3>
                 </Link>
-
-
-                {isUser && (
-                    <Link to={"/newproduct"} onClick={() => handleLinkClick(5)} className={activeLink === 5 ? 'active' : ''}>
-                        <span class="material-symbols-outlined">
-                            calculate
-                        </span>
-                        <h3>Hesaplama</h3>
-                    </Link>
-                )}
 
                 {isWriter && (
                     <Link to={"/new"} onClick={() => handleLinkClick(1)} className={activeLink === 1 ? 'active' : ''}>
@@ -125,27 +117,31 @@ const Sidebar = () => {
                     </Link>
                 )}
 
-                {/* <Link to={"/new"} onClick={() => handleLinkClick(1)} className={activeLink === 1 ? 'active' : ''}>
-                    <span class="material-symbols-outlined">
-                        edit_square
-                    </span>
-                    <h3>New Note</h3>
-                </Link> */}
-
                 {isUser && (
                 <>
-                    <Link to={"/profile"} onClick={() => handleLinkClick(2)} className={activeLink === 2 ? 'active' : ''}>
+                    <Link to={`/profile/${username}`} onClick={() => handleLinkClick(2)} className={activeLink === 2 ? 'active' : ''}>
                         <span class="material-symbols-outlined">
                             contact_mail
                         </span>
                         <h3>Profil</h3>
                     </Link>
-                    {/* <Link to={"/contact"} onClick={() => handleLinkClick(2)} className={activeLink === 2 ? 'active' : ''}>
+                    
+                    <Link to={"/contact"} onClick={() => handleLinkClick(4)} className={activeLink === 4 ? 'active' : ''}>
                         <span class="material-symbols-outlined">
-                            contact_mail
+                            report
                         </span>
-                        <h3>Profil</h3>
-                    </Link> */}
+                        <h3>Report</h3>
+                    </Link>
+
+                    {isAdmin && (
+                        <Link to={"/helpdesk"} onClick={() => handleLinkClick(7)} className={activeLink === 7 ? 'active' : ''}>
+                            <span class="material-symbols-outlined">
+                                admin_panel_settings
+                            </span>
+                            <h3>HelpDesk</h3>
+                        </Link>
+                    )}
+
                     <a onClick={logout} className={activeLink === 0 ? '' : ''}>
                         <span class="material-symbols-outlined">
                             logout

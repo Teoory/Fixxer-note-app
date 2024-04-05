@@ -827,3 +827,193 @@ main {
   text-decoration: none;
   cursor: pointer;
 }
+
+/* PROFIL PAGE */
+.ProfilePageMain {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 1rem;
+  margin: 0 auto;
+  max-width: 1200px;
+}
+
+.ProfilePageMain h1 {
+  font-size: 1.5rem;
+  margin: 0;
+  padding: 0;
+}
+
+.ProfileCard {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  gap: 15px;
+  max-width: 400px;
+  background: var(--color-dark);
+  border-radius: 25px;
+  padding: 10px;
+}
+
+.username {
+  font-size: 18px;
+  font-weight: bold;
+  color: #007bff;
+  text-align: center;
+  text-transform: capitalize;
+}
+
+.email {
+  color: var(--color-white);
+  margin-top: 5px;
+}
+
+.tags {
+  margin-top: 5px;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 16px;
+  font-weight: 500;
+  color: #888;
+}
+
+.admin {
+  color: red;
+}
+
+.editor {
+  color: purple;
+}
+
+.writer {
+  color: rgb(35, 87, 82);;
+}
+
+.user {
+  color: grey;
+}
+
+/* CONTACT PAGE */
+.form-container {
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  margin-top: 50px;
+  color: var(--color-black);
+}
+
+.form-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.form-container label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.form-container input[type="text"],
+.form-container input[type="email"],
+.form-container textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.form-container textarea {
+  height: 200px;
+  resize: none;
+  width: 400px;
+}
+
+.form-container button[type="submit"] {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: #4CAF50;
+  color: var(--color-white);
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.form-container button[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+.message-container p {
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+/* HELPDESK PAGE */
+.report-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.report-list {
+  margin-top: 50px;
+}
+
+.report-list p {
+  margin: 5px 0;
+  font-size: 14px;
+}
+
+.report-list strong {
+  color: #fff;
+  margin-right: 5px;
+}
+
+.report-item {
+  background-color: var(--color-light);
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 15px;
+}
+
+.report-item p {
+  margin: 10px 0;
+  text-transform: capitalize;
+}
+
+.report-item a {
+  color: var(--color-primary);
+}
+
+.report-item button {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: var(--color-danger);
+  color: var(--color-white);
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.report-item p strong {
+  font-weight: bold;
+}
+
+.loading-message {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.empty-message {
+  text-align: center;
+  margin-top: 20px;
+  font-style: italic;
+}
