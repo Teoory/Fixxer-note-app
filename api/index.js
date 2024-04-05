@@ -3,6 +3,7 @@ const cors = require ('cors');
 const mongoose = require ('mongoose');
 const User = require ('./models/User');
 const Note = require ('./models/Note');
+const Products = require ('./models/Products');
 const bcrypt = require ('bcryptjs');
 const jwt = require ('jsonwebtoken');
 const cookieParser = require ('cookie-parser');
@@ -135,6 +136,15 @@ app.get ('/note', async (req, res) => {
     }
 });
 
+app.delete ('/deleteallNotes', async (req, res) => {
+    try {
+        const noteDoc = await Note.deleteMany();
+        res.json(noteDoc);
+    } catch (e) {
+        res.status(400).json(e);
+    }
+});
+
 app.put('/note/:id/status', async (req, res) => {
     try {
       const { id } = req.params;
@@ -170,6 +180,42 @@ app.delete ('/note/:id/upvote', async (req, res) => {
     }
 });
 
+
+//? Product Post & Get
+app.post ('/product', async (req, res) => {
+    try {
+        const {name, price, kar, karOran, vergi, total} = req.body;
+        const productDoc = await Products.create({
+            name,
+            price,
+            kar,
+            karOran,
+            vergi,
+            total,
+        });
+        res.json(productDoc);
+    } catch (e) {
+        res.status(400).json(e);
+    }
+});
+
+app.get ('/product', async (req, res) => {
+    try {
+        const productDoc = await Products.find();
+        res.json(productDoc);
+    } catch (e) {
+        res.status(400).json(e);
+    }
+});
+
+app.delete ('/deleteallProducts', async (req, res) => {
+    try {
+        const productDoc = await Products.deleteMany();
+        res.json(productDoc);
+    } catch (e) {
+        res.status(400).json(e);
+    }
+});
 
 
 

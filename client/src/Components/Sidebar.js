@@ -91,7 +91,13 @@ const Sidebar = () => {
                     <span class="material-symbols-outlined">
                         home
                     </span>
-                    <h3>Home</h3>
+                    <h3>Notes</h3>
+                </Link>
+                <Link to={"/products"} onClick={() => handleLinkClick(6)} className={activeLink === 6 ? 'active' : ''}>
+                    <span class="material-symbols-outlined">
+                        topic
+                    </span>
+                    <h3>Products</h3>
                 </Link>
                 <Link to={"/report"} onClick={() => handleLinkClick(4)} className={activeLink === 4 ? 'active' : ''}>
                     <span class="material-symbols-outlined">
@@ -100,6 +106,15 @@ const Sidebar = () => {
                     <h3>Report</h3>
                 </Link>
 
+
+                {isUser && (
+                    <Link to={"/newproduct"} onClick={() => handleLinkClick(5)} className={activeLink === 5 ? 'active' : ''}>
+                        <span class="material-symbols-outlined">
+                            calculate
+                        </span>
+                        <h3>Hesaplama</h3>
+                    </Link>
+                )}
 
                 {isWriter && (
                     <Link to={"/new"} onClick={() => handleLinkClick(1)} className={activeLink === 1 ? 'active' : ''}>

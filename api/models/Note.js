@@ -4,9 +4,7 @@ const { Schema, model } = mongoose;
 const NoteSchema = new mongoose.Schema({
     title: {
         type: String,
-        required: [true, 'Please provide a title'],
-        min: 6,
-        unique: true
+        required: [true, 'Please provide a title']
     },
     content: {
         type: String,

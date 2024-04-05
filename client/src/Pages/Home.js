@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../Hooks/UserContext';
 import { format } from "date-fns";
 import { tr, eu, is } from 'date-fns/locale';
+import { Link } from 'react-router-dom';
 
 const Home = () => {
   const { setUserInfo, userInfo } = useContext(UserContext);
@@ -80,7 +81,7 @@ const Home = () => {
       '#ffffcc', // Sarı
       '#ccffcc', // Yeşil
       '#ccccff', // Mavi
-      '#ffccff', // Mor
+      '#ccecff', // Mavi
     ];
     return colors[index % colors.length];
   };
@@ -170,6 +171,21 @@ const Home = () => {
     setFilterOption(event.target.value);
   };
 
+  const deleteallNotes = async () => {
+    try {
+      await fetch('http://localhost:3030/deleteallNotes', {
+        method: 'DELETE',
+      });
+      setNotes([]);
+    } catch (error) {
+      console.error('Error deleting notes:', error);
+    }
+  };
+
+  function newNoteLink() {
+    window.location.href = '/new';
+  }
+
   const tags = userInfo?.tags;
 
   const isAdmin = tags?.includes('admin');
@@ -182,7 +198,7 @@ const Home = () => {
 
   return (
     <div>
-      <h1>Fixxer Notes</h1>
+      <h1 className='topHead'>Fixxer Notes</h1>
 
       <div className="gosterim">
       <select className='siralama' value={sortingOption} onChange={handleSortingChange}>
@@ -197,6 +213,22 @@ const Home = () => {
         <option value="pending">Pending</option>
         <option value="done">Done</option>
       </select>
+
+      <div className="adminbuttons">
+        {isWriter && (
+          <div className="newNote homedeletebut">
+            <button className='newNote' onClick={newNoteLink}>Yeni Not Ekle</button>
+          </div>
+        )}
+
+        {isAdmin && (
+          <>
+          <div className="deleteAll homedeletebut">
+            <button className='deleteAll' onClick={deleteallNotes}>Tüm Notları Sil</button>
+          </div>
+          </>
+        )}
+      </div>
 
       </div>
 
@@ -215,6 +247,7 @@ const Home = () => {
                 ) : (
                   <>
                     <select value={selectedStatus} onChange={(e) => setSelectedStatus(e.target.value)}>
+                      <option value="pending">Tag Seciniz.</option>
                       <option value="working">Working</option>
                       <option value="done">Done</option>
                       <option value="pending">Pending</option>
@@ -235,11 +268,11 @@ const Home = () => {
                 {isUser && (
                   <button onClick={() => upvote(note._id)}>
                     {upvotedNotes.has(note._id) 
-                    ? <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="uparrow w-6 h-6">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 6.75 12 3m0 0 3.75 3.75M12 3v18" />
-                      </svg>
-                    : <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="downarrow w-6 h-6">
+                    ? <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="downarrow w-6 h-6">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 13.5 12 21m0 0-7.5-7.5M12 21V3" />
+                      </svg>
+                    : <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="uparrow w-6 h-6">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 6.75 12 3m0 0 3.75 3.75M12 3v18" />
                       </svg>
                     }
                   </button>

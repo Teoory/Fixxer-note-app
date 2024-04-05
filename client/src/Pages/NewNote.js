@@ -40,7 +40,7 @@ const NewNote = () => {
     
     return (
         <div>
-            <h1>Yeni Not</h1>
+            <h1 className='topHead'>Yeni Not</h1>
 
             <form className='newNoteForm' onSubmit={handleSubmit}>
                 <input type="text"  placeholder="Title" 
