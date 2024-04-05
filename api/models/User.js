@@ -19,17 +19,17 @@ const UserSchema = new mongoose.Schema({
     },
     tags: {
         type: [String],
-        enum: ['admin', 'moderator', 'editor', 'master-writer', 'writer', 'user'],
+        enum: ['admin', 'editor', 'writer', 'user'],
         default: ['user']
     },
     profilePhoto: {
         type: String,
         default: 'https://fiyasko-blog-app.s3.eu-central-1.amazonaws.com/profilePhotos/default.jpg'
     },
-    score: {
-        type: Number,
-        default: 0
-    },
+    upvotedNotes: [{ 
+        type: Schema.Types.ObjectId,
+        ref: 'Note' 
+    }]
 });
 
 const UserModel = model('User', UserSchema);

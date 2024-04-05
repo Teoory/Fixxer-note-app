@@ -80,8 +80,35 @@ app.post ('/login', async (req, res) => {
     }
 });
 
-app.get ('/logout', (req, res) => {
+app.post('/logout', (req, res) => {
     res.clearCookie('token').json({message: 'Logged out'});
+});
+
+
+//? Profile
+app.get('/profile', (req, res) => {
+    const {token} = req.cookies;
+    jwt.verify(token, secret, {}, (err, info) => {
+        if(err) throw err;
+        res.json(info);
+    });
+});
+
+app.get('/profile/:username', async (req, res) => {
+    const { username } = req.params;
+  
+    try {
+      const user = await User.findOne({ username });
+      if (!user) {
+        return res.status(404).json({ error: 'User not found' });
+      }
+      const posts = await Post.find({ author: user._id }).sort({ createdAt: -1 });
+  
+      res.json({ user, posts });
+    } catch (error) {
+      console.error('Error getting user profile:', error.message);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
 });
 
 //? Note Post & Get
@@ -108,11 +135,34 @@ app.get ('/note', async (req, res) => {
     }
 });
 
+app.put('/note/:id/status', async (req, res) => {
+    try {
+      const { id } = req.params;
+      const { tags } = req.body;
+      const updatedNote = await Note.findByIdAndUpdate(id, { tags }, { new: true });
+      res.json(updatedNote);
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+});
+
 app.post ('/note/:id/upvote', async (req, res) => {
     try {
         const {id} = req.params;
         const noteDoc = await Note.findById(id);
         noteDoc.upvotes++;
+        await noteDoc.save();
+        res.json(noteDoc);
+    } catch (e) {
+        res.status(400).json(e);
+    }
+});
+
+app.delete ('/note/:id/upvote', async (req, res) => {
+    try {
+        const {id} = req.params;
+        const noteDoc = await Note.findById(id);
+        noteDoc.upvotes--;
         await noteDoc.save();
         res.json(noteDoc);
     } catch (e) {

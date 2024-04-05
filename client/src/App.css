@@ -211,8 +211,29 @@ main {
   padding: 20px;
 }
 
+.gosterim {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-gap: 20px;
+  padding: 20px;
+}
+
+.gosterim select {
+  padding: 10px;
+  border-radius: var(--border-radius);
+  border: 1px solid #46464620;
+}
+
+.gosterim select:focus {
+  border: 1px solid var(--color-primary);
+}
+
+.gosterim select option {
+  padding: 10px;
+}
+
 .siralama {
-  margin: 10px 0 0 25px;
+  margin-top: 10px;
 }
 
 .notes {
@@ -284,6 +305,26 @@ main {
   border-top: 1px solid #46464620;
 }
 
+.votes svg {
+  padding: 2px;
+  width: 22px;
+  border-radius: 50%;
+  color: white;
+}
+
+.upvotes {
+  font-weight: 700;
+  font-size: large;
+}
+
+.uparrow {
+  background-color: #4CAF50 !important;
+}
+
+.downarrow {
+  background-color: #F44336 !important;
+}
+
 /* NEW NOTE PAGE */
 .newNoteForm {
   display: grid;
@@ -343,8 +384,6 @@ main {
 }
 
 /* LOGIN PAGE */
-
-/* Login Page */
 .loginArea {
   display: flex;
   justify-content: center;
