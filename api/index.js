@@ -13,6 +13,7 @@ const path = require ('path');
 const fs = require ('fs');
 const sesion = require ('express-session');
 const ws = require ('ws');
+const { connect } = require('http2');
 const app = express ();
 require ('dotenv').config ();
 
@@ -84,6 +85,8 @@ app.post ('/login', async (req, res) => {
 
 app.post('/logout', (req, res) => {
     res.clearCookie('token').json({message: 'Logged out'});
+    connect.sid = null;
+    res.clearCookie('connect.sid').json({message: 'Logged out'});
 });
 
 
