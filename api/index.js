@@ -101,11 +101,26 @@ app.post('/logout', (req, res) => {
 
 //? Profile
 app.get('/profile', (req, res) => {
-    const {token} = req.cookies;
-    jwt.verify(token, secret, {}, (err, info) => {
-        if(err) throw err;
-        res.json(info);
-    });
+    try {
+        const { token } = req.cookies;
+        if (!token) {
+            return res.status(400).json({ message: 'No token found' });
+        }
+        jwt.verify(token, secret, {}, (err, info) => {
+            if (err) {
+                return res.status(401).json({ message: 'Unauthorized' });
+            }
+            res.json(info);
+        });
+    } catch (e) {
+        res.status(400).json(e);
+    }
+    
+    // const {token} = req.cookies;
+    // jwt.verify(token, secret, {}, (err, info) => {
+    //     if(err) throw err;
+    //     res.json(info);
+    // });
 });
 
 app.get('/profile/:username', async (req, res) => {
