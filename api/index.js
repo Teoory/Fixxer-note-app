@@ -83,7 +83,7 @@ app.post ('/login', async (req, res) => {
     }
 });
 
-app.get('/logout', (req, res) => {
+app.post('/logout', (req, res) => {
     const {token} = req.cookies;
     jwt.verify(token, secret, {}, (err, info) => {
         if(err) throw err;
