@@ -86,7 +86,10 @@ app.post ('/login', async (req, res) => {
 app.post('/logout', (req, res) => {
     const {token} = req.cookies;
     jwt.verify(token, secret, {}, (err, info) => {
-        if(err) throw err;
+        if(err) {
+            res.clearCookie('token').status(401).json({message: 'Unauthorized'});
+            return;
+        }
     });
     res.clearCookie('token').json({message: 'Logged out'});    
 });

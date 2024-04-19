@@ -25,9 +25,8 @@ const Home = () => {
   }, []);
   
   useEffect(() => {
-    fetch('https://fixxer-api.vercel.app/profile', {
-        credentials: 'include',
-    }).then(response => {
+    fetch('https://fixxer-api.vercel.app/profile')
+        .then(response => {
             response.json().then(userInfo => {
                 setUserInfo(userInfo);
             });
