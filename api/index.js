@@ -84,19 +84,8 @@ app.post ('/login', async (req, res) => {
 });
 
 app.post('/logout', (req, res) => {
-    const { token } = req.cookies;
-
-    if (!token) {
-        return res.status(400).json({ message: 'No token found' });
-    }
-
-    jwt.verify(token, secret, {}, (err, info) => {
-        if (err) {
-            return res.status(401).json({ message: 'Unauthorized' });
-        }
-        
-        res.clearCookie('token').json({ message: 'Logged out' });
-    });
+    const userDoc = null;
+    res.clearCookie('token').json({message: 'Logged out'});
 });
 
 //? Profile
@@ -106,21 +95,17 @@ app.get('/profile', (req, res) => {
         if (!token) {
             return res.status(400).json({ message: 'No token found' });
         }
-        jwt.verify(token, secret, {}, (err, info) => {
+
+        jwt.verify(token, secret, (err, info) => {
             if (err) {
-                return res.status(401).json({ message: 'Unauthorized' });
+                return res.clearCookie('token').status(401).json({ message: 'Unauthorized' });
             }
+            
             res.json(info);
         });
     } catch (e) {
         res.status(400).json(e);
     }
-    
-    // const {token} = req.cookies;
-    // jwt.verify(token, secret, {}, (err, info) => {
-    //     if(err) throw err;
-    //     res.json(info);
-    // });
 });
 
 app.get('/profile/:username', async (req, res) => {
