@@ -11,7 +11,7 @@ const NewNote = () => {
         e.preventDefault();
         const note = {title, content, tags};
 
-        const response = await fetch('http://localhost:3030/note', {
+        const response = await fetch('https://fixxer-api.vercel.app/note', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

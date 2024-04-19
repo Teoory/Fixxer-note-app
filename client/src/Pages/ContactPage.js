@@ -25,7 +25,7 @@ const ContactPage = () => {
             return;
         }
         try {
-            const response = await fetch('http://localhost:3030/contact', {
+            const response = await fetch('https://fixxer-api.vercel.app/contact', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

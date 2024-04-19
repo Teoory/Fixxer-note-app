@@ -7,7 +7,7 @@ const HelpdeskPage = () => {
     useEffect(() => {
         const fetchReports = async () => {
             try {
-                const response = await fetch('http://localhost:3030/contact');
+                const response = await fetch('https://fixxer-api.vercel.app/contact');
                 const data = await response.json();
                 setReports(data);
                 setLoading(false);
@@ -21,7 +21,7 @@ const HelpdeskPage = () => {
     }, []);
 
     function handleDelete(id) {
-        fetch(`http://localhost:3030/contact/${id}`, {
+        fetch(`https://fixxer-api.vercel.app/contact/${id}`, {
             method: 'DELETE',
         }).then(() => {
             setReports(reports.filter(report => report._id !== id));

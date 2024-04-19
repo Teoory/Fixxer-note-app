@@ -9,14 +9,14 @@ const ProfilPage = () => {
     const { setUserInfo, userInfo } = useContext(UserContext);
 
     useEffect(() => {
-        fetch(`http://localhost:3030/profile/${username}`)
+        fetch(`https://fixxer-api.vercel.app/profile/${username}`)
             .then(response => response.json())
             .then(data => setUserProfile(data));
     }, [username]);
 
 
     useEffect(() => {
-        fetch('http://localhost:3030/profile', {
+        fetch('https://fixxer-api.vercel.app/profile', {
             credentials: 'include',
         }).then(response => {
             response.json().then(userInfo => {
@@ -26,7 +26,7 @@ const ProfilPage = () => {
     }, []);
 
     useEffect(() => {
-        fetch(`http://localhost:3030/profile/${username}`)
+        fetch(`https://fixxer-api.vercel.app/profile/${username}`)
             .then(response => response.json())
             .then(data => setUserProfile(data));
     }, [username]);

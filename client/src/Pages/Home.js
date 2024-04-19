@@ -25,7 +25,7 @@ const Home = () => {
   }, []);
   
   useEffect(() => {
-    fetch('http://localhost:3030/profile', {
+    fetch('https://fixxer-api.vercel.app/profile', {
         credentials: 'include',
     }).then(response => {
             response.json().then(userInfo => {
@@ -36,7 +36,7 @@ const Home = () => {
 
   const CheckNotes = async () => {
     try {
-      const response = await fetch('http://localhost:3030/note');
+      const response = await fetch('https://fixxer-api.vercel.app/note');
       let data = await response.json();
       data = sortNotes(data, sortingOption);
       data = filterNotes(data, filterOption);
@@ -102,7 +102,7 @@ const Home = () => {
   function upvote(id) {
     if (upvotedNotes.has(id)) {
       // Eğer kullanıcı daha önce upvote yapmışsa, upvote'u sil
-      fetch(`http://localhost:3030/note/${id}/upvote`, {
+      fetch(`https://fixxer-api.vercel.app/note/${id}/upvote`, {
         method: 'DELETE',
       }).then(() => {
         // upvotedNotes dizisinden notun id'sini kaldır
@@ -113,7 +113,7 @@ const Home = () => {
       });
     } else {
       // Eğer kullanıcı daha önce upvote yapmamışsa, upvote'u ekle
-      fetch(`http://localhost:3030/note/${id}/upvote`, {
+      fetch(`https://fixxer-api.vercel.app/note/${id}/upvote`, {
         method: 'POST',
       }).then(() => {
         // upvotedNotes dizisine notun id'sini ekle
@@ -142,7 +142,7 @@ const Home = () => {
     setNotes(updatedNotes);
 
     // API'ye güncellenmiş notu gönder
-    fetch(`http://localhost:3030/note/${id}/status`, {
+    fetch(`https://fixxer-api.vercel.app/note/${id}/status`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
@@ -173,7 +173,7 @@ const Home = () => {
 
   const deleteallNotes = async () => {
     try {
-      await fetch('http://localhost:3030/deleteallNotes', {
+      await fetch('https://fixxer-api.vercel.app/deleteallNotes', {
         method: 'DELETE',
       });
       setNotes([]);

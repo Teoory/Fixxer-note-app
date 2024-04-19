@@ -9,7 +9,7 @@ const Products = () => {
     const [selectedProduct, setSelectedProduct] = useState(null);
 
     useEffect(() => {
-        fetch('http://localhost:3030/profile', {
+        fetch('https://fixxer-api.vercel.app/profile', {
             credentials: 'include',
         }).then(response => {
                 response.json().then(userInfo => {
@@ -24,7 +24,7 @@ const Products = () => {
 
     const fetchProducts = async () => {
         try {
-            const response = await fetch('http://localhost:3030/product');
+            const response = await fetch('https://fixxer-api.vercel.app/product');
             const data = await response.json();
             setProducts(data);
         } catch (error) {
@@ -34,7 +34,7 @@ const Products = () => {
 
     const deleteallProducts = async () => {
         try {
-            await fetch('http://localhost:3030/deleteallProducts', {
+            await fetch('https://fixxer-api.vercel.app/deleteallProducts', {
                 method: 'DELETE',
             });
             setProducts([]);

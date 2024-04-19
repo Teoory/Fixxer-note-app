@@ -9,7 +9,7 @@ const Sidebar = () => {
     const [activeLink, setActiveLink] = useState(0);
     
     useEffect(() => {
-        fetch('http://localhost:3030/profile', {
+        fetch('https://fixxer-api.vercel.app/profile', {
             credentials: 'include',
         }).then(response => {
                 response.json().then(userInfo => {
@@ -20,7 +20,7 @@ const Sidebar = () => {
 
     
     function logout() {
-        fetch('http://localhost:3030/logout', {
+        fetch('https://fixxer-api.vercel.app/logout', {
             credentials: 'include',
             method: 'POST',
         }).then(() => {

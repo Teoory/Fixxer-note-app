@@ -12,7 +12,7 @@ const NewProduct = () => {
     const inputRef = useRef(null);
 
     useEffect(() => {
-      fetch('http://localhost:3030/profile', {
+      fetch('https://fixxer-api.vercel.app/profile', {
           credentials: 'include',
       }).then(response => {
               response.json().then(userInfo => {
@@ -99,7 +99,7 @@ const NewProduct = () => {
         };
 
         try {
-            const response = await fetch('http://localhost:3030/product', requestOptions);
+            const response = await fetch('https://fixxer-api.vercel.app/product', requestOptions);
             const data = await response.json();
             if (response.ok) {
                 setRedirect(true);
