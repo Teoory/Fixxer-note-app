@@ -84,24 +84,26 @@ app.post ('/login', async (req, res) => {
 });
 
 app.post('/logout', (req, res) => {
-    const {token} = req.cookies;
+    const { token } = req.cookies;
+
+    if (!token) {
+        return res.status(400).json({ message: 'No token found' });
+    }
+
     jwt.verify(token, secret, {}, (err, info) => {
-        if(err) {
-            res.clearCookie('token').status(401).json({message: 'Unauthorized'});
-            return;
+        if (err) {
+            return res.status(401).json({ message: 'Unauthorized' });
         }
+        
+        res.clearCookie('token').json({ message: 'Logged out' });
     });
-    res.clearCookie('token').json({message: 'Logged out'});    
 });
 
 //? Profile
 app.get('/profile', (req, res) => {
     const {token} = req.cookies;
     jwt.verify(token, secret, {}, (err, info) => {
-        if(err) {
-            res.clearCookie('token').status(401).json({message: 'Unauthorized'});
-            return;
-        };
+        if(err) throw err;
         res.json(info);
     });
 });
