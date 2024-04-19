@@ -84,9 +84,8 @@ app.post ('/login', async (req, res) => {
 });
 
 app.post('/logout', (req, res) => {
-    res.clearCookie('token').json({message: 'Logged out'});
-    connect.sid = null;
-    res.clearCookie('connect.sid').json({message: 'Logged out'});
+    res.clearCookie('token');
+    console.log('Logged out');
 });
 
 
