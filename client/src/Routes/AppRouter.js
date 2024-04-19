@@ -22,7 +22,7 @@ const AppRouter = () => {
   const { setUserInfo, userInfo } = useContext(UserContext);
   
   useEffect(() => {
-    fetch('http://localhost:3030/profile', {
+    fetch('https://fixxer-api.vercel.app/profile', {
         credentials: 'include',
     }).then(response => {
             response.json().then(userInfo => {
