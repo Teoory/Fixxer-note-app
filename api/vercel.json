@@ -17,7 +17,7 @@
             "dest": "/index.js",
             "methods": ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
             "headers": {
-                "Access-Control-Allow-Origin": "https://fixxer-app.vercel.app/, http://localhost:3000",
+                "Access-Control-Allow-Origin": "https://fixxer-app.vercel.app/",
                 "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
                 "Access-Control-Allow-Headers": "X-Requested-With, Content-Type, Accept, X-CSRF-Token, Accept-Version, Content-Length, Content-MD5, Date, X-Api-Version",
                 "Access-Control-Allow-Credentials": "true",
