@@ -25,13 +25,13 @@ const Home = () => {
   }, []);
   
   useEffect(() => {
-    fetch('https://fixxer-api.vercel.app/profile')
-        .then(response => {
+    fetch('https://fixxer-api.vercel.app/profile', {
+    }).then(response => {
             response.json().then(userInfo => {
                 setUserInfo(userInfo);
             });
         })
-  }, []);
+}, []);
 
   const CheckNotes = async () => {
     try {

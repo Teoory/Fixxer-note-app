@@ -12,13 +12,12 @@ const NewProduct = () => {
     const inputRef = useRef(null);
 
     useEffect(() => {
-      fetch('https://fixxer-api.vercel.app/profile', {
-          credentials: 'include',
-      }).then(response => {
-              response.json().then(userInfo => {
-                  setUserInfo(userInfo);
-              });
-          })
+        fetch('https://fixxer-api.vercel.app/profile', {
+        }).then(response => {
+                response.json().then(userInfo => {
+                    setUserInfo(userInfo);
+                });
+            })
     }, []);
 
     const addInput = () => {
