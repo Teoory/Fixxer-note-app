@@ -11,21 +11,39 @@ const Sidebar = () => {
     useEffect(() => {
         fetch('https://fixxer-api.vercel.app/profile', {
             credentials: 'include',
-        }).then(response => {
-                response.json().then(userInfo => {
-                    setUserInfo(userInfo);
-                });
-            })
-    }, []);
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Profile fetch failed');
+            }
+            return response.json();
+        })
+        .then(userInfo => {
+            setUserInfo(userInfo);
+        })
+        .catch(error => {
+            console.error('Error fetching profile:', error);
+        });
+    }, [setUserInfo]);
 
-    
     function logout() {
         fetch('https://fixxer-api.vercel.app/logout', {
             credentials: 'include',
             method: 'POST',
-        }).then(() => {
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Logout failed');
+            }
+            return response.json();
+        })
+        .then(data => {
             setUserInfo(null);
+        })
+        .catch(error => {
+            console.error('Error during logout:', error);
         });
+        
         handleLinkClick(0);
     }
 
