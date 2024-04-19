@@ -83,11 +83,13 @@ app.post ('/login', async (req, res) => {
     }
 });
 
-app.post('/logout', (req, res) => {
-    res.clearCookie('token');
-    console.log('Logged out');
+app.get('/logout', (req, res) => {
+    const {token} = req.cookies;
+    jwt.verify(token, secret, {}, (err, info) => {
+        if(err) throw err;
+    });
+    res.clearCookie('token').json({message: 'Logged out'});    
 });
-
 
 //? Profile
 app.get('/profile', (req, res) => {

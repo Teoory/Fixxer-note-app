@@ -142,7 +142,7 @@ const Sidebar = () => {
                         </Link>
                     )}
 
-                    <a onClick={logout} className={activeLink === 0 ? '' : ''}>
+                    <a onClick={logout} style={{cursor:'pointer'}} className={activeLink === 0 ? '' : ''}>
                         <span class="material-symbols-outlined">
                             logout
                         </span>
