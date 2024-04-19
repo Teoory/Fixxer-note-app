@@ -10,7 +10,6 @@ const Products = () => {
 
     useEffect(() => {
         fetch('https://fixxer-api.vercel.app/profile', {
-            credentials: 'include',
         }).then(response => {
                 response.json().then(userInfo => {
                     setUserInfo(userInfo);
