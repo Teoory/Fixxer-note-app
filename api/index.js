@@ -20,7 +20,7 @@ const salt = bcrypt.genSaltSync(10);
 const secret = process.env.SECRET;
 
 const corsOptions = {
-    origin: ['http://localhost:3000', 'http://localhost:3030', 'https://fixxer-api.vercel.app/', 'https://fixxer-app.vercel.app/'],
+    origin: ['http://localhost:3000', 'http://localhost:3030', 'https://fixxer-api.vercel.app', 'https://fixxer-app.vercel.app'],
     credentials: true,
     methods: 'GET, POST, PUT, DELETE, OPTIONS',
     allowedHeaders: 'Content-Type, Authorization'
