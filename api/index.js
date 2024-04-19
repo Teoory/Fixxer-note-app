@@ -84,7 +84,7 @@ app.post ('/login', async (req, res) => {
 });
 
 app.post('/logout', (req, res) => {
-    const userDoc = null;
+    const { token } = null;
     res.clearCookie('token').json({message: 'Logged out'});
 });
 
