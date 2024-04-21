@@ -140,6 +140,35 @@ const Home = () => {
     setShowSelect(true);
   };
 
+  const handleVisibleChange = (id) => {
+    const updatedNotes = notes.map(note => {
+      if (note._id === id) {
+        return { ...note, visible: !note.visible };
+      }
+      return note;
+    });
+    setNotes(updatedNotes);
+
+    // API'ye güncellenmiş notu gönder
+    fetch(`https://fixxer-api.vercel.app/note/${id}/visible`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ visible: !notes.find(note => note._id === id).visible })
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Visibility update failed');
+      }
+    })
+    .catch(error => {
+      console.error('Error updating visibility:', error);
+    });
+  };
+
+
+
   const handleUpdateStatus = (id, newStatus) => {
     const updatedNotes = notes.map(note => {
       if (note._id === id) {
@@ -249,10 +278,16 @@ const Home = () => {
               {isEditor && (
               <>
                 {editingNoteId !== note._id ? (
-                  <button 
-                    style={{ backgroundColor: "#0098ff", maxHeight: "20px", marginTop: "10px", borderRadius: "15px", cursor: "pointer" }}
-                    onClick={() => handleEditButtonClick(note._id)}>Durumu Düzenle
-                  </button>
+                  <>
+                    <button 
+                      style={{ backgroundColor: "#0098ff", maxHeight: "20px", marginTop: "10px", borderRadius: "15px", cursor: "pointer" }}
+                      onClick={() => handleEditButtonClick(note._id)}>Durumu Düzenle
+                    </button>
+                    <button
+                      style={{ backgroundColor: "#ff0000", maxHeight: "20px", marginTop: "10px", borderRadius: "15px", cursor: "pointer" }}
+                      onClick={() => handleVisibleChange(note._id)}>{note.visible ? 'Gizle' : 'Göster'}
+                    </button>
+                  </>
                 ) : (
                   <>
                     <select value={selectedStatus} onChange={(e) => setSelectedStatus(e.target.value)}>

@@ -159,6 +159,17 @@ app.put('/note/:id/status', async (req, res) => {
     }
 });
 
+app.put('/note/:id/visible', async (req, res) => {
+    try {
+      const { id } = req.params;
+      const { visible } = req.body;
+      const updatedNote = await Note.findByIdAndUpdate(id, { visible }, { new: true });
+      res.json(updatedNote);
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+});
+
 app.post ('/note/:id/upvote', async (req, res) => {
     try {
         const {id} = req.params;
