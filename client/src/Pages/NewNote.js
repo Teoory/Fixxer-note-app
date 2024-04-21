@@ -23,7 +23,7 @@ const NewNote = () => {
             console.log('Note created');
             setTitle('');
             setContent('');
-            setTags('');
+            setTags('pending');
             setRedirect(true);
         } else {
             console.log('Note creation failed');
@@ -55,15 +55,6 @@ const NewNote = () => {
                                 (e) => setContent(e.target.value)
                             }>
                 </textarea>
-                <select value={tags}
-                        onChange={
-                            (e) => setTags(e.target.value)
-                        }>
-                    <option value="">Durum Seçiniz</option>
-                    <option value="working">Working</option>
-                    <option value="done">Done</option>
-                    <option value="pending">Pending</option>
-                </select>
 
                 <button type="submit">Create Note</button>
             </form>
