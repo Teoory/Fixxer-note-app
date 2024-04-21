@@ -4,12 +4,13 @@ import { Navigate } from "react-router-dom";
 const NewNote = () => {
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
-    const [tags, setTags] = useState('');
+    const [tags, setTags] = useState('pending');
+    const [visible, setVisible] = useState('hidden');
     const [redirect, setRedirect] = useState(false);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const note = {title, content, tags};
+        const note = {title, content, tags, visible};
 
         const response = await fetch('https://fixxer-api.vercel.app/note', {
             method: 'POST',
@@ -24,6 +25,7 @@ const NewNote = () => {
             setTitle('');
             setContent('');
             setTags('pending');
+            setVisible('hidden');
             setRedirect(true);
         } else {
             console.log('Note creation failed');

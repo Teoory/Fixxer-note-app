@@ -19,6 +19,10 @@ const NoteSchema = new mongoose.Schema({
         type: Number,
         default: 0
     },
+    visible: {
+        type: Boolean,
+        default: false,
+    },
     createdAt: {
         type: Date,
         default: Date.now

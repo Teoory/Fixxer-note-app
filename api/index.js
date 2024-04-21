@@ -117,11 +117,12 @@ app.get('/profile/:username', async (req, res) => {
 //? Note Post & Get
 app.post ('/note', async (req, res) => {
     try {
-        const {title, content, tags} = req.body;
+        const {title, content, tags, visible} = req.body;
         const noteDoc = await Note.create({
             title,
             content,
             tags,
+            visible,
         });
         res.json(noteDoc);
     } catch (e) {

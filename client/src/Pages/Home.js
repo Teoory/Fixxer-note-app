@@ -244,6 +244,7 @@ const Home = () => {
         {loading && <p>Loading...</p>}
         <div className="notes">
           {notes.map((note, index) => (
+            (note.visible || (isEditor && !note.visible)) && (
             <div className='note' key={note._id} style={{ backgroundColor: generateColor(index) }}>
               {isEditor && (
               <>
@@ -293,9 +294,12 @@ const Home = () => {
               })}
               </time>
             </div>
+            )
           ))}
         </div>
       </div>
+
+      
     </div>
   );
 };
