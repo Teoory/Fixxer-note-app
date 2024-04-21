@@ -126,7 +126,7 @@ const Sidebar = () => {
                     <h3>Hesaplama</h3>
                 </Link>
 
-                {isWriter && (
+                {isUser && (
                     <Link to={"/new"} onClick={() => handleLinkClick(1)} className={activeLink === 1 ? 'active' : ''}>
                         <span class="material-symbols-outlined">
                             edit_square

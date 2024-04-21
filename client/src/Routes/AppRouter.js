@@ -58,7 +58,7 @@ const AppRouter = () => {
           </>
         )}
 
-        {isWriter && (
+        {isUser && (
           <>
             <Route path="/new" element={<NewNote />} />
           </>
