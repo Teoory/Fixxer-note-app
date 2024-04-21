@@ -5,7 +5,7 @@ const NewNote = () => {
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const [tags, setTags] = useState('pending');
-    const [visible, setVisible] = useState('hidden');
+    const [visible, setVisible] = useState(false);
     const [redirect, setRedirect] = useState(false);
 
     const handleSubmit = async (e) => {
@@ -25,7 +25,7 @@ const NewNote = () => {
             setTitle('');
             setContent('');
             setTags('pending');
-            setVisible('hidden');
+            setVisible(false);
             setRedirect(true);
         } else {
             console.log('Note creation failed');
