@@ -23,8 +23,7 @@ const UserInfo = () => {
       });
     }, [setUserInfo]);
 
-    const username = userInfo.username;
-    const tags = userInfo.tags;
+    const { username, tags } = userInfo;
 
     const checkProfile = () => {
       setInterval(() => {
@@ -38,15 +37,15 @@ const UserInfo = () => {
           return response.json();
         })
         .then(userInfo => {
-          if (userInfo.tags !== tags) {
-            setUserInfo(userInfo);
-          }
+          setUserInfo(userInfo);
         })
         .catch(error => {
           console.error('Error fetching profile:', error);
         });
       }, 5000);
     }
+
+    checkProfile();
   
     return null;
 }
