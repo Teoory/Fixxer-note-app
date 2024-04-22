@@ -33,6 +33,7 @@ const Sidebar = () => {
         }).then(() => {
             document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
             setUserInfo(null);
+            console.log(userInfo);
         });
         
         handleLinkClick(0);
