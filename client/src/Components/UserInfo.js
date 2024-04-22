@@ -25,7 +25,7 @@ const UserInfo = () => {
 
   const fetchProfile = () => {
     setInterval(() => {
-      fetch(`https://fixxer-api.vercel.app/profile${userInfo.username}`, {
+      fetch(`https://fixxer-api.vercel.app/profile/${userInfo.username}`, {
         credentials: 'include',
       })
       .then(response => {
