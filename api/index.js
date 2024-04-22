@@ -110,6 +110,25 @@ app.get('/profile', (req, res) => {
     }
 });
 
+app.get('/profile/tags', async (req, res) => {
+    try {
+        const { token } = req.cookies;
+        if (!token) {
+            return res.status(400).json({ message: 'No token found' });
+        }
+
+        jwt.verify(token, secret, (err, info) => {
+            if (err) {
+                return res.clearCookie('token').status(401).json({ message: 'Unauthorized' });
+            }
+            
+            res.json(info.tags);
+        });
+    } catch (e) {
+        res.status(400).json(e);
+    }
+});
+
 app.get('/profile/:username', async (req, res) => {
     const {username} = req.params;
     const userDoc = await User.findOne ({username});

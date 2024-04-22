@@ -42,6 +42,27 @@ const Home = () => {
     });
   }, [setUserInfo]);
 
+  const checkProfileTags = () => {
+    setInterval(() => {
+      fetch('https://fixxer-api.vercel.app/profile/tags', {
+        credentials: 'include',
+      })
+      .then(response => {
+          if (!response.ok) {
+              throw new Error('Profile tags fetch failed');
+          }
+          return response.json();
+      })
+      .then(tags => {
+          setUserInfo({ ...userInfo, tags });
+      })
+      .catch(error => {
+          console.error('Error fetching profile tags:', error);
+      });
+    }, 3000);
+  };
+  checkProfileTags();
+
   const CheckNotes = async () => {
     try {
       const response = await fetch('https://fixxer-api.vercel.app/note');

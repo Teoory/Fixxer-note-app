@@ -26,12 +26,16 @@ const Sidebar = () => {
         });
     }, [setUserInfo]);
 
+    function deleteCookie(name) {
+        document.cookie = name + '=; Max-Age=-99999999;';  
+    }
+
     function logout() {
         fetch('https://fixxer-api.vercel.app/logout', {
             credentials: 'include',
             method: 'POST',
         }).then(() => {
-            document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+            deleteCookie('token');
             setUserInfo(null);
             console.log(userInfo);
         });
