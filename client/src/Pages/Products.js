@@ -1,30 +1,14 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { UserContext } from '../Hooks/UserContext';
 import { Link } from 'react-router-dom';
+import UserInfo from '../Components/UserInfo';
 
 const Products = () => {
-    const { setUserInfo, userInfo } = useContext(UserContext);
+    const { userInfo } = useContext(UserContext);
     const [searchTerm, setSearchTerm] = useState('');
     const [products, setProducts] = useState([]);
     const [selectedProduct, setSelectedProduct] = useState(null);
 
-    useEffect(() => {
-        fetch('https://fixxer-api.vercel.app/profile', {
-          credentials: 'include',
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Profile fetch failed');
-            }
-            return response.json();
-        })
-        .then(userInfo => {
-            setUserInfo(userInfo);
-        })
-        .catch(error => {
-            console.error('Error fetching profile:', error);
-        });
-      }, [setUserInfo]);
 
     useEffect(() => {
         fetchProducts();
@@ -74,6 +58,7 @@ const Products = () => {
 
     return (
         <>
+        <UserInfo />
         <h1 className='topHead'>Products</h1>
         <div className='ProductContent'>
             <div className="searchArea">
