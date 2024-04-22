@@ -3,10 +3,30 @@ import { Link } from 'react-router-dom';
 import { UserContext } from '../Hooks/UserContext';
 
 const UserInfo = () => {
-    const { userInfo, setUserInfo } = useContext(UserContext);
+  const { setUserInfo, userInfo } = useContext(UserContext);
+  const username = userInfo.username;
   
-    useEffect(() => {
-      fetch('https://fixxer-api.vercel.app/profile', {
+  useEffect(() => {
+    fetch('https://fixxer-api.vercel.app/profile', {
+      credentials: 'include',
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Profile fetch failed');
+        }
+        return response.json();
+    })
+    .then(userInfo => {
+        setUserInfo(userInfo);
+    })
+    .catch(error => {
+        console.error('Error fetching profile:', error);
+    });
+  }, [setUserInfo]);
+
+  const checkProfile = () => {
+    setInterval(() => {
+      fetch(`https://fixxer-api.vercel.app/profile/${username}`, {
         credentials: 'include',
       })
       .then(response => {
@@ -21,33 +41,12 @@ const UserInfo = () => {
       .catch(error => {
         console.error('Error fetching profile:', error);
       });
-    }, [setUserInfo]);
+    }, 5000);
+  }
 
-    const { username, tags } = userInfo;
-
-    const checkProfile = () => {
-      setInterval(() => {
-        fetch(`https://fixxer-api.vercel.app/profile/${username}`, {
-          credentials: 'include',
-        })
-        .then(response => {
-          if (!response.ok) {
-            throw new Error('Profile fetch failed');
-          }
-          return response.json();
-        })
-        .then(userInfo => {
-          setUserInfo(userInfo);
-        })
-        .catch(error => {
-          console.error('Error fetching profile:', error);
-        });
-      }, 5000);
-    }
-
-    checkProfile();
+  checkProfile();
   
-    return null;
+  return null;
 }
 
 export default UserInfo
