@@ -4,7 +4,6 @@ import { UserContext } from '../Hooks/UserContext';
 
 const UserInfo = () => {
   const { setUserInfo, userInfo } = useContext(UserContext);
-  const username = userInfo.username;
   
   useEffect(() => {
     fetch('https://fixxer-api.vercel.app/profile', {
@@ -23,6 +22,8 @@ const UserInfo = () => {
         console.error('Error fetching profile:', error);
     });
   }, [setUserInfo]);
+
+  const username = userInfo.username;
 
   const checkProfile = () => {
     setInterval(() => {
