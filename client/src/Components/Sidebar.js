@@ -31,6 +31,7 @@ const Sidebar = () => {
             credentials: 'include',
             method: 'POST',
         }).then(() => {
+            document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
             setUserInfo(null);
         });
         

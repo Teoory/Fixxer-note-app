@@ -39,11 +39,6 @@ app.use (sesion ({
 
 mongoose.connect (process.env.MONGODB_URL);
 
-app.use((req, res, next) => {
-    res.setHeader('Cache-Control', 'no-store');
-    next();
-});
-
 //? Register & Login
 app.post ('/register', async (req, res) => {
     const {username, password} = req.body;
@@ -73,10 +68,15 @@ app.post ('/login', async (req, res) => {
                 return res.status(500).json({ error: 'Token oluşturulamadı' });
             }
 
-            res.cookie('token', token,{sameSite: "none", maxAge: 24 * 60 * 60 * 1000, httpOnly: false, secure: true}).json({
-                id:userDoc._id,
-                username,
-                tags:userDoc.tags,
+            res.cookie('token', token,{
+                    sameSite: "none", 
+                    maxAge: 24 * 60 * 60 * 1000, 
+                    httpOnly: false, 
+                    secure: true
+                }).json({
+                    id:userDoc._id,
+                    username,
+                    tags:userDoc.tags,
             });
             console.log('Logged in, Token olusturuldu.', token);
         });
@@ -86,7 +86,7 @@ app.post ('/login', async (req, res) => {
 });
 
 app.post('/logout', (req, res) => {
-    res.clearCookie('token', { path: '/', domain: 'https://fixxer-app.vercel.app' });
+    res.cookie('token', token, { sameSite: 'none', secure: true, httpOnly: false });
     res.status(200).send('Logged out successfully');
 });
 
