@@ -3,9 +3,10 @@ import { UserContext } from '../Hooks/UserContext';
 import { format } from "date-fns";
 import { tr, eu, is } from 'date-fns/locale';
 import { Link } from 'react-router-dom';
+import UserInfo from '../Components/UserInfo';
 
-const Home = () => {
-  const { setUserInfo, userInfo } = useContext(UserContext);
+const Home = () => {  
+  const { userInfo } = useContext(UserContext);
   const [notes, setNotes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [sortingOption, setSortingOption] = useState('newest');
@@ -23,24 +24,6 @@ const Home = () => {
     const upvotedNotesFromStorage = JSON.parse(localStorage.getItem('upvotedNotes')) || [];
     setUpvotedNotes(new Set(upvotedNotesFromStorage));
   }, []);
-  
-  useEffect(() => {
-    fetch('https://fixxer-api.vercel.app/profile', {
-      credentials: 'include',
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Profile fetch failed');
-        }
-        return response.json();
-    })
-    .then(userInfo => {
-        setUserInfo(userInfo);
-    })
-    .catch(error => {
-        console.error('Error fetching profile:', error);
-    });
-  }, [setUserInfo]);
 
   const CheckNotes = async () => {
     try {
@@ -235,6 +218,7 @@ const Home = () => {
 
   return (
     <div>
+      <UserInfo />
       <h1 className='topHead'>Fixxer Notes</h1>
 
       <div className="gosterim">
