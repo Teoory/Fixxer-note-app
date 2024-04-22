@@ -1,6 +1,7 @@
 import { useEffect, useState, useContext } from 'react';
 import { useParams, Navigate } from 'react-router-dom';
 import { UserContext } from '../Hooks/UserContext';
+import UserInfo from '../Components/UserInfo';
 
 
 const ProfilPage = () => {
@@ -14,24 +15,6 @@ const ProfilPage = () => {
             .then(data => setUserProfile(data));
     }, [username]);
 
-
-    useEffect(() => {
-        fetch('https://fixxer-api.vercel.app/profile', {
-          credentials: 'include',
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Profile fetch failed');
-            }
-            return response.json();
-        })
-        .then(userInfo => {
-            setUserInfo(userInfo);
-        })
-        .catch(error => {
-            console.error('Error fetching profile:', error);
-        });
-      }, [setUserInfo]);
 
     useEffect(() => {
         fetch(`https://fixxer-api.vercel.app/profile/${username}`)
@@ -51,6 +34,7 @@ const ProfilPage = () => {
     
     return (
         <div className='user-profile-page'>
+        <UserInfo />
             <div className="ProfilePageMain">
                 <h1>Profil</h1>
                 <div className="ProfileCard">
