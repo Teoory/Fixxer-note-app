@@ -23,6 +23,8 @@ const UserInfo = () => {
     });
   }, [setUserInfo]);
 
+  console.log(userInfo);
+
   const fetchProfile = () => {
     setInterval(() => {
       fetch(`https://fixxer-api.vercel.app/profile/${userInfo.username}`, {
