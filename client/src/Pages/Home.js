@@ -283,10 +283,12 @@ const Home = () => {
                       style={{ backgroundColor: "#0098ff", maxHeight: "20px", marginTop: "10px", borderRadius: "15px", cursor: "pointer" }}
                       onClick={() => handleEditButtonClick(note._id)}>Durumu Düzenle
                     </button>
-                    <button
-                      style={{ backgroundColor: "#ff0000", maxHeight: "20px", marginTop: "10px", borderRadius: "15px", cursor: "pointer" }}
-                      onClick={() => handleVisibleChange(note._id)}>{note.visible ? 'Gizle' : 'Göster'}
-                    </button>
+                    {isAdmin && (
+                      <button
+                        style={{ backgroundColor: "#ff0000", maxHeight: "20px", marginTop: "10px", borderRadius: "15px", cursor: "pointer" }}
+                        onClick={() => handleVisibleChange(note._id)}>{note.visible ? 'Gizle' : 'Göster'}
+                      </button>
+                    )}
                   </>
                 ) : (
                   <>
