@@ -23,30 +23,28 @@ const UserInfo = () => {
     });
   }, [setUserInfo]);
 
-  const username = userInfo.username;
-
-  const checkProfile = () => {
+  const fetchProfile = () => {
     setInterval(() => {
-      fetch(`https://fixxer-api.vercel.app/profile/${username}`, {
+      fetch(`https://fixxer-api.vercel.app/profile${userInfo.username}`, {
         credentials: 'include',
       })
       .then(response => {
-        if (!response.ok) {
-          throw new Error('Profile fetch failed');
-        }
-        return response.json();
+          if (!response.ok) {
+              throw new Error('Profile fetch failed');
+          }
+          return response.json();
       })
       .then(userInfo => {
-        setUserInfo(userInfo);
+          setUserInfo(userInfo);
       })
       .catch(error => {
-        console.error('Error fetching profile:', error);
+          console.error('Error fetching profile:', error);
       });
     }, 5000);
   }
 
-  checkProfile();
-  
+  fetchProfile();
+
   return null;
 }
 
