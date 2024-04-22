@@ -26,6 +26,10 @@ const ProductSchema = new mongoose.Schema({
         type: Number,
         required: [true, 'Please provide a total'],
     },
+    description: {
+        type: String,
+        required: [false, 'If you want to provide a description'],
+    },
     createdAt: {
         type: Date,
         default: Date.now

@@ -41,11 +41,10 @@ mongoose.connect (process.env.MONGODB_URL);
 
 //? Register & Login
 app.post ('/register', async (req, res) => {
-    const {username, password, email} = req.body;
+    const {username, password} = req.body;
     try {
         const userDoc = await User.create({
             username,
-            email,
             password:bcrypt.hashSync(password, salt),
             tags: ['user'],
         })
@@ -63,7 +62,7 @@ app.post ('/login', async (req, res) => {
     }
     const  passOk = bcrypt.compareSync(password, userDoc.password);
     if(passOk){
-        jwt.sign({username, profilePhoto:userDoc.profilePhoto , email:userDoc.email, tags:userDoc.tags, id:userDoc._id}, secret, {} , (err, token) => {
+        jwt.sign({username, tags:userDoc.tags, id:userDoc._id}, secret, {} , (err, token) => {
             if (err) {
                 console.error('Token oluşturulamadı:', err);
                 return res.status(500).json({ error: 'Token oluşturulamadı' });
@@ -72,9 +71,7 @@ app.post ('/login', async (req, res) => {
             res.cookie('token', token,{sameSite: "none", maxAge: 24 * 60 * 60 * 1000, httpOnly: false, secure: true}).json({
                 id:userDoc._id,
                 username,
-                email:userDoc.email,
                 tags:userDoc.tags,
-                profilePhoto: userDoc.profilePhoto,
             });
             console.log('Logged in, Token olusturuldu.', token);
         });
@@ -84,8 +81,8 @@ app.post ('/login', async (req, res) => {
 });
 
 app.post('/logout', (req, res) => {
-    const { token } = null;
     res.clearCookie('token').json({message: 'Logged out'});
+    res.redirect('/login');
 });
 
 //? Profile
@@ -198,7 +195,7 @@ app.delete ('/note/:id/upvote', async (req, res) => {
 //? Product Post & Get
 app.post ('/product', async (req, res) => {
     try {
-        const {name, price, kar, karOran, vergi, total} = req.body;
+        const {name, price, kar, karOran, vergi, total, description} = req.body;
         const productDoc = await Products.create({
             name,
             price,
@@ -206,6 +203,7 @@ app.post ('/product', async (req, res) => {
             karOran,
             vergi,
             total,
+            description,
         });
         res.json(productDoc);
     } catch (e) {

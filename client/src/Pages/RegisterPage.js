@@ -5,7 +5,6 @@ const RegisterPage = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-    const [email,setEmail] = useState('');
     const [redirect, setRedirect] = useState(false);
     const [passwordValidations, setPasswordValidations] = useState({
         minLength: false,
@@ -28,7 +27,7 @@ const RegisterPage = () => {
         const response = await fetch('https://fixxer-api.vercel.app/register', {
             method: 'POST',
             credentials: 'include',
-            body: JSON.stringify({username, password, email}),
+            body: JSON.stringify({username, password}),
             headers: {'Content-Type': 'application/json'},
         });
         if (response.ok) {
@@ -64,11 +63,6 @@ const RegisterPage = () => {
           <form className="login" onSubmit={register}>
             <h1>Kayıt Ol</h1>
             <div className="inputArea">
-            <input type="email"
-                    placeholder="email"
-                    value={email}
-                    required
-                    onChange={ev => setEmail(ev.target.value)} />
             <input type="text"
                     placeholder="username"
                     value={username}

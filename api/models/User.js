@@ -8,11 +8,6 @@ const UserSchema = new mongoose.Schema({
         min: 6,
         unique: true
     },
-    email: {
-        type: String,
-        required: [true, 'Please provide a email'],
-        unique: true
-    },
     password: {
         type: String,
         required: [true, 'Please provide a password'],
@@ -21,10 +16,6 @@ const UserSchema = new mongoose.Schema({
         type: [String],
         enum: ['admin', 'editor', 'writer', 'user'],
         default: ['user']
-    },
-    profilePhoto: {
-        type: String,
-        default: 'https://fiyasko-blog-app.s3.eu-central-1.amazonaws.com/profilePhotos/default.jpg'
     },
     upvotedNotes: [{ 
         type: Schema.Types.ObjectId,

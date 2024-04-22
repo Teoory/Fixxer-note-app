@@ -7,6 +7,7 @@ const NewProduct = () => {
     const [inputs, setInputs] = useState([{ id: 0, value: '' }]);
     const [karOran, setKarOran] = useState(25);
     const [productName, setProductName] = useState('');
+    const [productDescription, setProductDescription] = useState('');
     const [redirect, setRedirect] = useState(false);
 
     const inputRef = useRef(null);
@@ -82,7 +83,7 @@ const NewProduct = () => {
     };
 
     const handleSave = async () => {
-        const { totalAmount, kar, karOran, vergi, sonFiyat } = calculate();
+        const { totalAmount, kar, karOran, vergi, sonFiyat} = calculate();
         const productNameWithRandomNumber = productName + '#' + generateRandomNumber();
 
         const requestOptions = {
@@ -94,7 +95,8 @@ const NewProduct = () => {
                 kar,
                 karOran: karOran,
                 vergi,
-                total: sonFiyat
+                total: sonFiyat,
+                description: productDescription
             })
         };
 
@@ -165,6 +167,7 @@ const NewProduct = () => {
                 <>
                     <div className="newbuttonarea">
                         <input type="text" placeholder='Isim' value={productName} onChange={e => setProductName(e.target.value)} />
+                        <input type="text" placeholder='Acıklama (Zorunlu değil!)' value={productDescription} onChange={e => setProductDescription(e.target.value)} />
                     </div>
                     <div className="newbuttonarea">
                         <button className="calcButton" onClick={handleSave}>Kaydet</button>

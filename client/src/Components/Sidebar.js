@@ -30,18 +30,8 @@ const Sidebar = () => {
         fetch('https://fixxer-api.vercel.app/logout', {
             credentials: 'include',
             method: 'POST',
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Logout failed');
-            }
-            return response.json();
-        })
-        .then(data => {
+        }).then(() => {
             setUserInfo(null);
-        })
-        .catch(error => {
-            console.error('Error during logout:', error);
         });
         
         handleLinkClick(0);
