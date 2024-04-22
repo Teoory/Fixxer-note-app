@@ -39,6 +39,11 @@ app.use (sesion ({
 
 mongoose.connect (process.env.MONGODB_URL);
 
+app.use((req, res, next) => {
+    res.setHeader('Cache-Control', 'no-store');
+    next();
+});
+
 //? Register & Login
 app.post ('/register', async (req, res) => {
     const {username, password} = req.body;
@@ -81,7 +86,7 @@ app.post ('/login', async (req, res) => {
 });
 
 app.post('/logout', (req, res) => {
-    res.clearCookie('token', { secure: true });
+    res.clearCookie('token', { path: '/', domain: 'https://fixxer-app.vercel.app' });
     res.status(200).send('Logged out successfully');
 });
 
