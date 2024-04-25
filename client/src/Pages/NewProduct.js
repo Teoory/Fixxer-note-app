@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import { UserContext } from '../Hooks/UserContext';
 import { Navigate } from "react-router-dom";
-import UserInfo from '../Components/UserInfo';
 
 const NewProduct = () => {
-    const { userInfo } = useContext(UserContext);
+    const { setUserInfo, userInfo } = useContext(UserContext);
     const [inputs, setInputs] = useState([{ id: 0, value: '' }]);
     const [karOran, setKarOran] = useState(25);
     const [productName, setProductName] = useState('');
@@ -12,6 +11,16 @@ const NewProduct = () => {
     const [redirect, setRedirect] = useState(false);
 
     const inputRef = useRef(null);
+
+    useEffect(() => {
+        fetch('https://fixxer-api.vercel.app/profile', {
+            credentials: 'include',
+        }).then(response => {
+                response.json().then(userInfo => {
+                    setUserInfo(userInfo);
+                });
+            })
+    }, []);
 
 
     const addInput = () => {
@@ -117,7 +126,6 @@ const NewProduct = () => {
 
     return (
         <div className="container">
-        <UserInfo />
             <h1 className='head2 topHead'>Kar ve Vergi Hesaplama</h1>
             <div id="inputArea">
                 {inputs.map(input => (
