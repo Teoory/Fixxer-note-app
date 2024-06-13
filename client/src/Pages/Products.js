@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { UserContext } from '../Hooks/UserContext';
 import { Link } from 'react-router-dom';
-import UserInfo from '../Components/UserInfo';
 
 const Products = () => {
     const { setUserInfo, userInfo } = useContext(UserContext);
