@@ -114,6 +114,9 @@ const Products = () => {
                             <span className="close" onClick={closeDetailModal}>&times;</span>
                             <h1>Product Details</h1>
                             <h2>{selectedProduct.name}</h2>
+                            {selectedProduct.description && 
+                                <h3>{selectedProduct.description}</h3>
+                            }
                             <p className='info'>
                                 <strong>Kar ve Vergisiz Toplam:</strong> <span className='tb'>{selectedProduct.price.toFixed(2)} $</span>
                             </p>
