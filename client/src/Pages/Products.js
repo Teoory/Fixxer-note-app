@@ -115,8 +115,8 @@ const Products = () => {
                             <h2>{selectedProduct.name}</h2>
                             {selectedProduct.description && 
                             <>
-                                <h2>Description: </h2>
-                                <h3>{selectedProduct.description}</h3>
+                                <p><b>Description: </b>
+                                {selectedProduct.description}</p>
                             </>}
                             <p className='info'>
                                 <strong>Kar ve Vergisiz Toplam:</strong> <span className='tb'>{selectedProduct.price.toFixed(2)} $</span>
