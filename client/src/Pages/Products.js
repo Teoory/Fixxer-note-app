@@ -115,7 +115,7 @@ const Products = () => {
                             <h2>{selectedProduct.name}</h2>
                             {selectedProduct.description && 
                             <>
-                                <p><b>Description: </b>
+                                <p><span className="description">Description: </span>
                                 {selectedProduct.description}</p>
                             </>}
                             <p className='info'>

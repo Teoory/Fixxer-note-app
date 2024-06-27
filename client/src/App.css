@@ -1017,3 +1017,9 @@ main {
   margin-top: 20px;
   font-style: italic;
 }
+
+.modal-content .description {
+  font-weight: 800;
+  font-size: large;
+  color: #45a049;
+}
