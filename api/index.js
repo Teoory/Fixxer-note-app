@@ -45,11 +45,13 @@ app.post ('/register', async (req, res) => {
     try {
         const userDoc = await User.create({
             username,
+            email: username,
             password:bcrypt.hashSync(password, salt),
-            tags: ['user'],
+            tags: ['user']
         })
         res.json(userDoc);
     } catch (e) {
+        console.log(e);
         res.status(400).json(e);
     }
 });
